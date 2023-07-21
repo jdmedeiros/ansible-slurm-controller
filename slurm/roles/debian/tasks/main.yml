@@ -2,3 +2,5 @@
 ---
 
 - include_tasks: "update_and_upgrade.yml"
+- include_tasks: "create_munge_user.yml"
+- include_tasks: "create_slurm_user.yml"
