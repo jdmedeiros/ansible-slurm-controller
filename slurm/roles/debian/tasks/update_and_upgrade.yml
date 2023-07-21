@@ -6,27 +6,27 @@
 #              Finally, the system is rebooted to apply the updates.
 #
 
-tasks:
-  - name: Set DEBIAN_FRONTEND environment variable
-    ansible.builtin.become_shell: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /etc/profile"
-    # Comment: Set DEBIAN_FRONTEND to noninteractive to avoid prompts during upgrade
+# List of tasks directly under the playbook (no root-level "tasks" key)
+- name: Set DEBIAN_FRONTEND environment variable
+  ansible.builtin.become_shell: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /etc/profile"
+  # Comment: Set DEBIAN_FRONTEND to noninteractive to avoid prompts during upgrade
 
-  - name: Update apt cache
-    ansible.builtin.apt:
-      update_cache: yes
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
 
-  - name: Upgrade system packages (non-interactive)
-    ansible.builtin.apt:
-      upgrade: dist
-      autoremove: yes
-      autoclean: yes
-      force_apt_get: yes
-      install_recommends: yes
+- name: Upgrade system packages (non-interactive)
+  ansible.builtin.apt:
+    upgrade: dist
+    autoremove: yes
+    autoclean: yes
+    force_apt_get: yes
+    install_recommends: yes
 
-  - name: Reboot the system
-    ansible.builtin.reboot:
-      reboot_timeout: 300
-      msg: "Rebooting the system to apply updates..."
-    async: 0
-    poll: 0
-    become: yes
+- name: Reboot the system
+  ansible.builtin.reboot:
+    reboot_timeout: 300
+    msg: "Rebooting the system to apply updates..."
+  async: 0
+  poll: 0
+  become: yes
