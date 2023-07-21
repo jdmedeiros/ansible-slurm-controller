@@ -3,26 +3,22 @@
 # Description: This playbook creates the SLURM user and group on the target hosts.
 #
 
-- name: Create SLURM user and group
-  hosts: your_target_hosts
-  become: yes
-  tasks:
-    - name: Set SLURMUSER variable
-      ansible.builtin.set_fact:
-        SLURMUSER: 967
+- name: Set SLURMUSER variable
+  ansible.builtin.set_fact:
+    SLURMUSER: 967
 
-    - name: Create SLURM group
-      ansible.builtin.group:
-        name: slurm
-        gid: "{{ SLURMUSER }}"
-      tags: slurm
+- name: Create SLURM group
+  ansible.builtin.group:
+    name: slurm
+    gid: "{{ SLURMUSER }}"
+  tags: slurm
 
-    - name: Create SLURM user
-      ansible.builtin.user:
-        name: slurm
-        comment: "SLURM workload manager"
-        home: /var/lib/slurm
-        uid: "{{ SLURMUSER }}"
-        group: slurm
-        shell: /bin/bash
-      tags: slurm
+- name: Create SLURM user
+  ansible.builtin.user:
+    name: slurm
+    comment: "SLURM workload manager"
+    home: /var/lib/slurm
+    uid: "{{ SLURMUSER }}"
+    group: slurm
+    shell: /bin/bash
+  tags: slurm
