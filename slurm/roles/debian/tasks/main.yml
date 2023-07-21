@@ -1,4 +1,4 @@
 # tasks file for debian
 ---
 
-- include: "update_and_upgrade.yml"
+- include_tasks: "update_and_upgrade.yml"
