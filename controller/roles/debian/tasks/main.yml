@@ -1,5 +1,4 @@
 ---
-# tasks file for debian
 - name: Ping all Debian hosts
   hosts: debian_hosts
   tasks:
