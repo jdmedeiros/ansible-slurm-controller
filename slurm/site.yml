@@ -1,6 +1,12 @@
 ---
-- hosts: localhost
+- hosts: debian_hosts
   remote_user: ubuntu
+  become: yes
   roles:
-    - roles/debian
-    - roles/redhat
+    - debian
+
+- hosts: redhat_hosts
+  remote_user: ec2-user
+  become: yes
+  roles:
+    - redhat
