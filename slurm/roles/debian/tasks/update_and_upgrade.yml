@@ -1,0 +1,34 @@
+---
+# Playbook: Update and Upgrade the System
+# Description: This playbook performs a non-interactive update and upgrade of the system.
+#              It sets the DEBIAN_FRONTEND environment variable to avoid prompts during upgrade.
+#              The system packages are updated, and unnecessary packages are removed.
+#              Finally, the system is rebooted to apply the updates.
+#
+
+- name: Update and Upgrade the System
+  tasks:
+    - name: Set DEBIAN_FRONTEND environment variable
+      ansible.builtin.become_shell: "echo 'export DEBIAN_FRONTEND=noninteractive' >> /etc/profile"
+      # Comment: Set DEBIAN_FRONTEND to noninteractive to avoid prompts during upgrade
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Upgrade system packages (non-interactive)
+      ansible.builtin.apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+        force_apt_get: yes
+        install_recommends: yes
+
+    - name: Reboot the system
+      ansible.builtin.reboot:
+        reboot_timeout: 300
+        msg: "Rebooting the system to apply updates..."
+      async: 0
+      poll: 0
+      become: yes
+

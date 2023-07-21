@@ -1,9 +1,10 @@
 ---
 - hosts: debian_hosts
   remote_user: ubuntu
+  gather_facts: yes
   become: yes
   roles:
-    - debian
+    - { debian, task_exclusions: [] }
 
 - hosts: redhat_hosts
   remote_user: ec2-user
