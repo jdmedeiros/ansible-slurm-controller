@@ -4,7 +4,7 @@
   gather_facts: yes
   become: yes
   roles:
-    - { roles/debian, task_exclusions: [ ] }
+    - roles/debian, task_exclusions: [ ]
 
 - hosts: redhat_hosts
   remote_user: ec2-user
