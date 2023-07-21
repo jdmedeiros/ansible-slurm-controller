@@ -1,6 +1,0 @@
----
-- name: Ping all Debian hosts
-  hosts: debian_hosts
-  tasks:
-    - name: Ping test
-      ping:

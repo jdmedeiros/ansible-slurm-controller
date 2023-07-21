@@ -1,6 +1,0 @@
----
-- name: Ping all Red Hat hosts
-  hosts: redhat_hosts
-  tasks:
-    - name: Ping test
-      ping:
