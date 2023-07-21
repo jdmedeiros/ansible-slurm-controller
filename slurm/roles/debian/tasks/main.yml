@@ -1,9 +1,11 @@
-# tasks file for debian
 ---
+# tasks file for debian
 
 - include_tasks: "update_and_upgrade.yml"
   when: "'update_and_upgrade' not in debian_exclusions"
+
 - include_tasks: "create_munge_user.yml"
   when: "'create_munge_user' not in debian_exclusions"
+
 - include_tasks: "create_slurm_user.yml"
-  when: "'create_munge_user' not in debian_exclusions"
+  when: "'create_slurm_user' not in debian_exclusions"

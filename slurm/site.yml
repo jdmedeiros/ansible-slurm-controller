@@ -8,6 +8,7 @@
 
 - hosts: redhat_hosts
   remote_user: ec2-user
+  gather_facts: yes
   become: yes
   roles:
     - { role: roles/redhat, redhat_exclusions: [] }
