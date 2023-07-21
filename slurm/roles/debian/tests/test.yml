@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: debian_hosts
+  remote_user: ubuntu
   roles:
     - debian
