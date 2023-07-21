@@ -1,7 +1,5 @@
 ---
 - name: Main Ansible Playbook
-  hosts: all
-  become: yes
 
   roles:
     - debian
