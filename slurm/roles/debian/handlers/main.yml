@@ -1,2 +1,10 @@
 ---
-# handlers file for debian
+# Handler to reboot the system after upgrade
+- name: Reboot the system to apply updates
+  ansible.builtin.reboot:
+    reboot_timeout: 300
+    msg: "Rebooting the system to apply updates..."
+  async: 0
+  poll: 0
+  become: yes
+  listen: "Reboot the system to apply updates"
