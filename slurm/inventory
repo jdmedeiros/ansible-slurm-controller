@@ -1,0 +1,6 @@
+[debian_hosts]
+172.31.95.179 ansible_user=ubuntu
+
+[redhat_hosts]
+10.0.0.2 ansible_user=ec2-user
+10.0.0.3 ansible_user=ec2-user
