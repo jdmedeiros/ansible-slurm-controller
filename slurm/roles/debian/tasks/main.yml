@@ -9,3 +9,6 @@
 
 - include_tasks: "create_slurm_user.yml"
   when: "'create_slurm_user' not in debian_exclusions"
+
+- include_tasks: "install_munge.yml"
+  when: "'install_munge' not in debian_exclusions"

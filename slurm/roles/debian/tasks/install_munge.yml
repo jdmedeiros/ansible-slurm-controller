@@ -1,0 +1,50 @@
+- name: Install Munge and related packages
+  # Description: Install Munge, libmunge-dev, libmunge2, and rng-tools packages non-interactively
+  apt:
+    name:
+      - munge
+      - libmunge-dev
+      - libmunge2
+      - rng-tools
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+    install_recommends: yes
+  become: yes
+
+- name: Start rngd with /dev/urandom as a random data source
+  # Description: Start the rngd service with /dev/urandom as the random data source
+  command: rngd -r /dev/urandom
+  become: yes
+
+- name: Create Munge Key
+  # Description: Create the Munge key using appropriate command based on the Ubuntu version
+  command: >
+    sh -c "if [ '{{ ansible_lsb.major_release }}' == '22.04' ]; then
+              /usr/sbin/mungekey -f
+            else
+              /usr/sbin/create-munge-key -r -f
+            fi"
+  become: yes
+
+- name: Generate Random Key
+  # Description: Generate a random key and save it to /etc/munge/munge.key
+  command: dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key
+  become: yes
+
+- name: Set Permissions for Munge Key
+  # Description: Set correct ownership and permissions for the Munge key file
+  file:
+    path: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0400'
+  become: yes
+
+- name: Enable and Start Munge Service
+  # Description: Enable and start the Munge service using systemctl
+  service:
+    name: munge
+    state: started
+    enabled: yes
+  become: yes
