@@ -2,4 +2,3 @@
 ---
 
 - include: update_and_upgrade.yml
-  when: update_and_upgrade not in task_exclusions
