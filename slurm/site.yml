@@ -4,10 +4,10 @@
   gather_facts: yes
   become: yes
   roles:
-    - roles/debian
+    - roles/debian, debian_exclusion: [update_and_upgrade]
 
 - hosts: redhat_hosts
   remote_user: ec2-user
   become: yes
   roles:
-    - roles/redhat
+    - roles/redhat, redhat_exclusion: []
