@@ -19,12 +19,12 @@
 
 - name: Create Munge Key
   # Description: Create the Munge key using appropriate command based on the Ubuntu version
-  command: >
-    sh -c "if [ '{{ ansible_lsb.major_release }}' == '22.04' ]; then
-              /usr/sbin/mungekey -f
-            else
-              /usr/sbin/create-munge-key -r -f
-            fi"
+  shell: >
+    if grep -q '^VERSION_ID="22.04"$' /etc/os-release; then
+      /usr/sbin/mungekey -f
+    else
+      /usr/sbin/create-munge-key -r -f
+    fi
   become: yes
 
 - name: Generate Random Key
