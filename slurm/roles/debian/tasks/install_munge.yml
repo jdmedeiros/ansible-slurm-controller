@@ -16,6 +16,7 @@
   # Description: Start the rngd service with /dev/urandom as the random data source
   command: rngd -r /dev/urandom
   become: yes
+  ignore_errors: yes
 
 - name: Create Munge Key
   # Description: Create the Munge key using appropriate command based on the Ubuntu version
